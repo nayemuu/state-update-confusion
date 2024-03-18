@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
-function Button2(props) {
+function Button2() {
   const [count, setCount] = useState(0);
-  // console.log('count = ', count);
+  console.log("home count = ", count);
+  console.log("rendering");
   const fetchData = async () => {
+    console.log("inside calling async function");
+    console.log("count = ", count);
     setCount(2);
     const response = await fetch(
-      'https://jsonplaceholder.typicode.com/posts?_limit=5'
+      "https://jsonplaceholder.typicode.com/posts?_limit=5"
     );
     if (response.ok) {
       const data = await response.json();
@@ -15,9 +18,12 @@ function Button2(props) {
     setCount(3);
   };
 
-  const incrementHandler = () => {
+  const incrementHandler = async () => {
     setCount(1);
-    fetchData();
+    console.log("count = ", count);
+    await fetchData();
+    console.log("after calling async function");
+    setCount(4);
   };
 
   return (
